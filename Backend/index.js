@@ -10,6 +10,9 @@ const port =  3000;
 // Connect to the database
 connectToDatabase();
 
+//Middleware
+app.use(express.json());
+
 // Available Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/notes', notesRoute);
