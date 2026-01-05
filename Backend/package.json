@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "description": "E-Notebook - Your virtual notebook on the cloud",
   "main": "index.js",
-  "type" :"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node index.js",
-    "dev" : "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Aditya Patel",
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1",
+    "express-validator": "^7.3.1",
     "mongoose": "^9.1.1"
   },
   "devDependencies": {
