@@ -1,8 +1,13 @@
 import express from "express";
 import User from "../Models/Users.js";
 import { body, validationResult } from "express-validator";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
 
+
+const JWT_SECRET = "ThisisaJWT@#SEC&RET";
+
+// Creating a express router to catching the route
 const router = express.Router();
 
 //Create a user using: POST "/api/auth/createuser"
@@ -42,16 +47,23 @@ router.post(
       const hash = await bcrypt.hash(req.body.password, salt);
 
       // Create user in the database
-      await User.create({
+      user = await User.create({
         name: req.body.name,
         email: req.body.email,
         password: hash,
       });
 
+      // Getting JWT token for security purpose
+      const data = {
+        user : {
+          id : user.id
+        }
+      }
+      const JWTAuthToken = jwt.sign(data,  JWT_SECRET)
 
       res
         .status(201)
-        .json({ success: true, message: "User created successfully" });
+        .json({ success: true, message: "User created successfully", token: JWTAuthToken });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: "Internal Server Error" });
