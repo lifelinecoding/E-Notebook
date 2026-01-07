@@ -2,15 +2,14 @@ import express from "express";
 import User from "../Models/Users.js";
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
-import jwt from 'jsonwebtoken';
-
+import jwt from "jsonwebtoken";
 
 const JWT_SECRET = "ThisisaJWT@#SEC&RET";
 
 // Creating a express router to catching the route
 const router = express.Router();
 
-//Create a user using: POST "/api/auth/createuser"
+// Route 1:- Create a user using: POST "/api/auth/createuser"
 
 router.post(
   "/createuser",
@@ -55,18 +54,84 @@ router.post(
 
       // Getting JWT token for security purpose
       const data = {
-        user : {
-          id : user.id
-        }
-      }
-      const JWTAuthToken = jwt.sign(data,  JWT_SECRET)
+        user: {
+          id: user.id,
+        },
+      };
+      const JWTAuthToken = jwt.sign(data, JWT_SECRET);
 
-      res
-        .status(201)
-        .json({ success: true, message: "User created successfully", token: JWTAuthToken });
+      res.status(201).json({
+        success: true,
+        status: "User created successfully",
+        token: JWTAuthToken,
+      });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
+);
+
+// Route 2:- Authenticate a user using: GET "/api/auth/login"
+
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Please enter a valid email"),
+    body("password")
+      .exists()
+      .withMessage("Password cannot be blank!")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters"),
+  ],
+  async (req, res) => {
+    // Validation check
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    // Try to login the user
+    try {
+      // Fetching the user by the email entered by the user from the database
+      let user = await User.findOne({ email: req.body.email });
+      // Check if the email is valid or not.
+      if (!user) {
+        return res
+          .status(400)
+          .json({ Error: "Please try to login with correct credentials." });
+      }
+
+      const { email, password } = req.body;
+
+      // Comparing the password entered by the user with the hash stored in the database
+      const comparePassword = await bcrypt.compare(password, user.password);
+
+      //Checking if the passwords matches or not.
+      if (!comparePassword) {
+        return res
+          .status(400)
+          .json({ Error: "Please try to login with correct credentials." });
+      }
+
+      // Getting JWT token for security purpose
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      //Signing toekn with the Secret key.
+      const JWTAuthToken = jwt.sign(data, JWT_SECRET);
+
+      // User logging status
+      res.status(201).json({
+        status: "Logged in successfully",
+        token: JWTAuthToken,
+      });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({ Error: "Internal Server Error" });
     }
   }
 );
