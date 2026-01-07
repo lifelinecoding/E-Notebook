@@ -3,6 +3,7 @@ import User from "../Models/Users.js";
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import fetchUser from "../Middleware/fetchuser.js";
 
 const JWT_SECRET = "ThisisaJWT@#SEC&RET";
 
@@ -72,7 +73,7 @@ router.post(
   }
 );
 
-// Route 2:- Authenticate a user using: GET "/api/auth/login"
+// Route 2:- Authenticate a user using: POST "/api/auth/login" : No login Required
 
 router.post(
   "/login",
@@ -135,5 +136,18 @@ router.post(
     }
   }
 );
+
+// Route 3:- Get Logged in user deatails using: POST "/api/auth/getuser" : Login required
+
+router.post("/getuser",fetchUser, async (req, res) => {
+  try {
+    let userID = req.user.id;
+    const user = await User.findById(userID).select("-password");
+    res.send(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ Error: "Internal Server Error" });
+  }
+});
 
 export default router;
