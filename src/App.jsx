@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <h1>Hello Vite + React!</h1>
+      <h1>This is a my first project with backend</h1>
     </>
   );
 }
