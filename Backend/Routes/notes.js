@@ -9,9 +9,14 @@ const router = express.Router();
 
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
   try {
+    // Fetching all notes of a specific user by the user ID
     const notes = await Notes.find({ user: req.user.id });
+
+    //Checking if the notes are available or not.
     if (!notes) {
-      return res.status(400).json({ Error: "User not found" });
+      return res
+        .status(400)
+        .json({ Error: "No notes available for this user" });
     }
     res.json(notes);
   } catch (error) {
@@ -47,13 +52,10 @@ router.post(
         return res.status(400).json({ errors: errors.array() });
       }
 
+      // Destructuring the details from the request body to create a new note in the database.
       const { title, description, tag } = req.body;
-      // let note = new Notes({
-      //   title, description, tag, user: req.user.id
-      // })
 
-      // note.save();
-
+      // Creating a new note in the database
       let note = await Notes.create({
         title: title,
         description: description,
@@ -68,5 +70,46 @@ router.post(
     }
   }
 );
+
+// Route 3:- Update an existing note using : PUT "api/notes/updatenote" : Login Required
+
+router.put("/updatenote/:id", fetchUser, async (req, res) => {
+  try {
+    const { title, description, tag } = req.body;
+
+    // Create a new note object
+    const newNote = {};
+    if (title) {
+      newNote.title = title;
+    }
+    if (description) {
+      newNote.description = description;
+    }
+    if (tag) {
+      newNote.tag = tag;
+    }
+
+    // Find the note to be updated and update it
+
+    let note = await Notes.findById(req.params.id);
+    if (!note) {
+      return res.status(404).send("Note not found");
+    }
+
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).send("Unauthorized Access");
+    }
+
+    note = await Notes.findByIdAndUpdate(
+      req.params.id,
+      { $set: newNote },
+      { new: true }
+    );
+    res.json(note);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ Error: "Internal Server Error" });
+  }
+});
 
 export default router;
