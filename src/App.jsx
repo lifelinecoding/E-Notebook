@@ -1,10 +1,12 @@
 import React from "react";
+import Navbar from "../Components/Navbar";
+import Layout from "../Components/Layout";
 
 function App() {
 
   return (
     <>
-      <h1>This is a my first project with backend</h1>
+      <Layout />
     </>
   );
 }
