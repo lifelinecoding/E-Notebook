@@ -4,7 +4,7 @@ import NoteContext from "./NoteContext";
 const NoteState = (props) => {
   const noteInitial = [
     {
-      _id: "695f8b2cd2518de9c7699f58",
+      _id: "695f8b2cd2518de9c7699f58t",
       user: "695e25cf44f39271ec4e79ef",
       title: "My title",
       description: "I am a hero",
@@ -13,7 +13,7 @@ const NoteState = (props) => {
       __v: 0,
     },
     {
-      _id: "695f8b2cd2518de9c7699f58",
+      _id: "695f8b2cd2518de9c7699f58x",
       user: "695e25cf44f39271ec4e79ef",
       title: "My title",
       description: "I am a hero",
@@ -42,10 +42,22 @@ const NoteState = (props) => {
 
   // Function to delete an existing note
 
+  const deleteNote = (id) => {
+    console.log("Deleting note with id:" + id);
+    if(window.confirm("Are you sure you want to delete this note?")){
+      const noteToDelete = Note.forEach(element => {
+        if(element._id === id){
+          Note.splice(Note.indexOf(element), 1);
+          setNote([...Note]);
+        }
+      });
+    }
+  }
+
   // Function to update an existing note
 
   return (
-    <NoteContext.Provider value={{ Note, setNote, addNote }}>
+    <NoteContext.Provider value={{ Note, setNote, addNote, deleteNote }}>
       {props.children}
     </NoteContext.Provider>
   );
