@@ -24,7 +24,6 @@ const NoteState = (props) => {
   ];
   const [Note, setNote] = useState(noteInitial);
 
-
   // Function to add a new note
   const addNote = (title, description, tag) => {
     // TODO: API call to add note to backend would go here
@@ -43,21 +42,32 @@ const NoteState = (props) => {
   // Function to delete an existing note
 
   const deleteNote = (id) => {
+    //TODO: API call to delete note from backend would go here
     console.log("Deleting note with id:" + id);
-    if(window.confirm("Are you sure you want to delete this note?")){
-      const noteToDelete = Note.forEach(element => {
-        if(element._id === id){
-          Note.splice(Note.indexOf(element), 1);
-          setNote([...Note]);
-        }
-      });
+    if (window.confirm("Are you sure you want to delete this note?")) {
+      const noteToDelete = Note.filter((note) => note._id !== id);
+      setNote(noteToDelete);
     }
-  }
+  };
 
   // Function to update an existing note
+  const updateNote = (id, title, description, tag) => {
+    // TODO: API call to update note in backend would go here
+    const updatedNotes = Note.map((note) => {
+      console.log("Updating note with id:" + id);
+      if (note._id === id) {
+        // return { ...note, title, description, tag };
+        return { ...note, title: title, description: description, tag: tag };
+      }
+      return note;
+    });
+    setNote(updatedNotes);
+  };
 
   return (
-    <NoteContext.Provider value={{ Note, setNote, addNote, deleteNote }}>
+    <NoteContext.Provider
+      value={{ Note, setNote, addNote, deleteNote, updateNote }}
+    >
       {props.children}
     </NoteContext.Provider>
   );
