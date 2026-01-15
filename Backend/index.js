@@ -2,6 +2,7 @@ import express from "express";
 import connectToDatabase from "./Database.js";
 import authRoutes from "./Routes/auth.js";
 import notesRoute from "./Routes/notes.js";
+import cors from 'cors';
 
 const app = express();
 
@@ -11,6 +12,7 @@ const port = 5000;
 connectToDatabase();
 
 //Middleware
+app.use(cors());
 app.use(express.json());
 
 // Available Routes
