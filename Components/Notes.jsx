@@ -142,6 +142,9 @@ const Notes = () => {
                 onClick={handleSubmit}
                 type="button"
                 className="btn btn-primary"
+                disabled={
+                  notes.etitle.length < 3 || notes.edescription.length < 5
+                }
               >
                 Save changes
               </button>

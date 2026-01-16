@@ -27,6 +27,7 @@ router.post(
       .withMessage("Password must be at least 8 characters"),
   ],
   async (req, res) => {
+    let success = false;
     // Validation check
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -61,8 +62,9 @@ router.post(
       };
       const JWTAuthToken = jwt.sign(data, JWT_SECRET);
 
+      success = true;
       res.status(201).json({
-        success: true,
+        success,
         status: "User created successfully",
         token: JWTAuthToken,
       });
@@ -86,6 +88,7 @@ router.post(
       .withMessage("Password must be at least 8 characters"),
   ],
   async (req, res) => {
+    let success = false;
     // Validation check
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -126,7 +129,9 @@ router.post(
       const JWTAuthToken = jwt.sign(data, JWT_SECRET);
 
       // User logging status
+      success = true;
       res.status(201).json({
+        success,
         status: "Logged in successfully",
         token: JWTAuthToken,
       });
@@ -139,7 +144,7 @@ router.post(
 
 // Route 3:- Get Logged in user deatails using: POST "/api/auth/getuser" : Login required
 
-router.post("/getuser",fetchUser, async (req, res) => {
+router.post("/getuser", fetchUser, async (req, res) => {
   try {
     let userID = req.user.id;
     const user = await User.findById(userID).select("-password");

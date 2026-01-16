@@ -15,6 +15,7 @@ const AddNote = () => {
     e.preventDefault();
     // Logic to add the note will go here
     addNote(note.title, note.description, note.tag);
+    setNote({ title: "", description: "", tag: "" });
   };
 
   const onChange = (e) => {
@@ -92,6 +93,9 @@ const AddNote = () => {
                     <button
                       type="submit"
                       className="btn btn-primary btn-lg rounded-3"
+                      disabled={
+                        note.title.length < 3 || note.description.length < 5
+                      }
                     >
                       Create Note
                     </button>
