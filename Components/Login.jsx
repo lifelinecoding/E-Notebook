@@ -7,6 +7,23 @@ const Login = () => {
     password: "",
   });
 
+  const [passwordView, setpasswordView] = useState({
+    type: "password",
+    text: "Show",
+  });
+
+  const togglePasswordState = () => {
+    if (passwordView.text === "Hide") {
+      setpasswordView({ type: "password", text: "Show" });
+    } else {
+      setpasswordView({ type: "text", text: "Hide" });
+    }
+
+    setTimeout(() => {
+      setpasswordView({ type: "password", text: "Show" });
+    }, 1000);
+  };
+
   const navigate = useNavigate();
 
   const onChange = (e) => {
@@ -47,8 +64,8 @@ const Login = () => {
       className="container d-flex justify-content-center align-items-center"
       style={{ minHeight: "80vh" }}
     >
-      <div className="card p-4 shadow" style={{ width: "400px" }}>
-        <h3 className="text-center mb-4">Login</h3>
+      <div className="card p-4 shadow-lg" style={{ width: "400px" }}>
+        <h3 className="text-center mb-4 text-primary fw-bold">Login</h3>
 
         <form onSubmit={handleSubmit}>
           {/* Email */}
@@ -73,20 +90,30 @@ const Login = () => {
             <label htmlFor="password" className="form-label fw-semibold">
               Password
             </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={credentials.password}
-              onChange={onChange}
-              placeholder="Enter your password"
-              required
-            />
+            <div className="input-group">
+              <input
+                type={passwordView.type}
+                className="form-control"
+                id="password"
+                name="password"
+                value={credentials.password}
+                onChange={onChange}
+                placeholder="Enter your password"
+                required
+              />
+
+              <button
+                type="button"
+                className="btn btn-primary fw-bold"
+                onClick={togglePasswordState}
+              >
+                {passwordView.text}
+              </button>
+            </div>
           </div>
 
           {/* Login Button */}
-          <button type="submit" className="btn btn-primary w-100">
+          <button type="submit" className="btn btn-primary w-100 fw-bold">
             Login
           </button>
         </form>

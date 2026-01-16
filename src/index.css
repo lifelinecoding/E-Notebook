@@ -1,3 +1,7 @@
 i{
     cursor: pointer;
 }
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
