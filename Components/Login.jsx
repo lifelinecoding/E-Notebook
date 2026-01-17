@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -65,7 +65,9 @@ const Login = () => {
       style={{ minHeight: "80vh" }}
     >
       <div className="card p-4 shadow-lg" style={{ width: "400px" }}>
-        <h3 className="text-center mb-4 text-primary fw-bold">Login</h3>
+        <h3 className="text-center mb-4 text-primary fw-bold">
+          Login to your Account
+        </h3>
 
         <form onSubmit={handleSubmit}>
           {/* Email */}
@@ -80,6 +82,7 @@ const Login = () => {
               name="email"
               value={credentials.email}
               onChange={onChange}
+              autoComplete="email"
               placeholder="Enter your email"
               required
             />
@@ -98,6 +101,7 @@ const Login = () => {
                 name="password"
                 value={credentials.password}
                 onChange={onChange}
+                autoComplete="current-password"
                 placeholder="Enter your password"
                 required
               />
@@ -106,6 +110,7 @@ const Login = () => {
                 type="button"
                 className="btn btn-primary fw-bold"
                 onClick={togglePasswordState}
+                disabled={credentials.password.length <= 0}
               >
                 {passwordView.text}
               </button>
@@ -113,9 +118,24 @@ const Login = () => {
           </div>
 
           {/* Login Button */}
-          <button type="submit" className="btn btn-primary w-100 fw-bold">
+          <button
+            type="submit"
+            disabled={
+              credentials.email.length < 5 || credentials.password.length < 8
+            }
+            className="btn btn-primary w-100 fw-bold"
+          >
             Login
           </button>
+          <p className="text-center mt-3 text-muted">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="text-primary fw-semibold text-decoration-none"
+            >
+              Signup
+            </Link>
+          </p>
         </form>
       </div>
     </div>

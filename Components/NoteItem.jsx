@@ -7,14 +7,16 @@ const NoteItem = (props) => {
   const { deleteNote } = context;
   const { note, editNote } = props;
   return (
-    <div className="card col-md-3 mx-2 my-3 shadow" style={{ width: "18rem", position: "relative" }}>
+    <div
+      className="card col-md-3 mx-2 my-3 shadow"
+      style={{ width: "18rem", position: "relative" }}
+    >
       <div className="card-body">
         <h5 className="card-title">{note.title}</h5>
         <p className="card-text">{note.description}</p>
-        <div className="d-flex justify-content-start align-items-end"
-            style={{position: "absolute", bottom: "10px"
-
-            }}  
+        <div
+          className="d-flex justify-content-start align-items-end"
+          style={{ position: "absolute", bottom: "10px" }}
         >
           <i
             onClick={() => {

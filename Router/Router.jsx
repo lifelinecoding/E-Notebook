@@ -5,6 +5,7 @@ import About from "../Components/About.jsx";
 // import Layout from "../Components/Layout.jsx";
 import App from "../src/App.jsx";
 import Login from "../Components/Login.jsx";
+import Signup from "../Components/Signup.jsx";
 
 const Router = createBrowserRouter([
   // Define your routes here
@@ -23,6 +24,10 @@ const Router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
       },
     ],
   },

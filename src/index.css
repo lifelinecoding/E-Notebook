@@ -1,7 +1,29 @@
-i{
-    cursor: pointer;
+i {
+  cursor: pointer;
 }
 
 .navbar-toggler-icon {
-    filter: invert(1);
+  filter: invert(1);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+/* App wrapper */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content grows, footer pushed down */
+.main-content {
+  flex: 1;
 }
