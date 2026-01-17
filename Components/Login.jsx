@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AlertContext from "../Context/Alert/AlertContext";
 
 const Login = () => {
+  const alertcontext = useContext(AlertContext);
+  const { showAlert } = alertcontext;
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -35,26 +39,35 @@ const Login = () => {
 
     // Login logic will go here (API call)
 
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
 
-    const token = await response.json();
-    console.log(token);
+      const token = await response.json();
+      console.log(token);
 
-    localStorage.setItem("auth-token", token.token);
+      localStorage.setItem("auth-token", token.token);
 
-    if (token.success) {
-      navigate("/");
+      if (token.success) {
+        navigate("/");
+        showAlert("Logged in successfully", "success");
+      }
+      if (!token.success) {
+        showAlert(token.Error, "danger");
+      }
+    } catch (error) {
+      console.log(error.message);
+      // showAlert(error.message, "danger");
     }
-
+    // Testing purpose.
     // console.log("Email:", credentials.email);
     // console.log("Password:", credentials.password);
   };

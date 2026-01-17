@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AlertContext from "../Context/Alert/AlertContext";
 
 const Signup = () => {
+  const alertcontext = useContext(AlertContext);
+  const { showAlert } = alertcontext;
+
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     name: "",
@@ -33,33 +37,42 @@ const Signup = () => {
     e.preventDefault();
 
     if (credentials.password !== credentials.cpassword) {
-      alert("Passwords do not match!");
+      showAlert("Password does not match", "warning");
       return;
     }
 
-    console.log("Signup Data:", credentials);
-    let response = await fetch("http://localhost:5000/api/auth/createuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
+    // console.log("Signup Data:", credentials);
+    try {
+      let response = await fetch("http://localhost:5000/api/auth/createuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          password: credentials.password,
+        }),
+      });
 
-    const token = await response.json();
-    setCredentials({
-      name: "",
-      email: "",
-      password: "",
-      cpassword: "",
-    });
-    if (token.success) {
-      navigate("/");
-      localStorage.setItem("auth-token", token.token);
+      const token = await response.json();
+      setCredentials({
+        name: "",
+        email: "",
+        password: "",
+        cpassword: "",
+      });
+      if (token.success) {
+        navigate("/");
+        localStorage.setItem("auth-token", token.token);
+        showAlert("Your account has been created successfully", "success");
+      }
+      if (!token.success) {
+        showAlert(token.error, "danger");
+      }
+    } catch (error) {
+      console.log(error.message);
+      // showAlert(error.message, "danger");
     }
   };
 
@@ -117,8 +130,9 @@ const Signup = () => {
               />
               <button
                 type="button"
-                className="btn btn-outline-secondary rounded-end-3 fw-bold"
+                className="btn btn-primary rounded-end-3 fw-bold"
                 onClick={togglePasswordState}
+                disabled={credentials.password.length <= 0}
               >
                 {passwordView.text}
               </button>

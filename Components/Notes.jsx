@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Context from "../Context/Note/NoteContext";
+// import AlertContext from "../Context/Alert/AlertContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
 
 const Notes = () => {
   const context = useContext(Context);
   const { Note, getNotes, updateNote } = context;
+  // const alertcontext = useContext(AlertContext);
+  // const { showAlert } = alertcontext;
   useEffect(() => {
     getNotes();
   }, [Note]);
@@ -155,6 +158,7 @@ const Notes = () => {
 
       <div className="container my-3 d-flex justify-content-center">
         <div className="row w-[80] justify-content-start px-3">
+          {Note.length === 0 && "No notes to display"}
           {Note.map((note, idx) => {
             return <NoteItem key={idx} note={note} editNote={editNote} />;
           })}

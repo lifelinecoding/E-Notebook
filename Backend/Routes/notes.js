@@ -8,6 +8,7 @@ const router = express.Router();
 // Route 1:- Get all the notes using : GET "api/notes/fetchallnotes" : Login Required
 
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
+  let success = false;
   try {
     // Fetching all notes of a specific user by the user ID
     const notes = await Notes.find({ user: req.user.id });
@@ -18,7 +19,8 @@ router.get("/fetchallnotes", fetchUser, async (req, res) => {
         .status(400)
         .json({ Error: "No notes available for this user" });
     }
-    res.json(notes);
+    success = true;
+    res.json({success,notes});
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ Error: "Internal Server Error" });
@@ -39,12 +41,13 @@ router.post(
     body("description")
       .notEmpty()
       .withMessage("Description should not be empty")
-      .isLength({ min: 5, max: 80 })
+      .isLength({ min: 5, max: 400 })
       .withMessage(
-        "Note description length should lie between 5 to 80 characters"
+        "Note description length should lie between 5 to 400 characters"
       ),
   ],
   async (req, res) => {
+    let success = false;
     try {
       // Validation check
       const errors = validationResult(req);
@@ -62,8 +65,8 @@ router.post(
         tag: tag,
         user: req.user.id,
       });
-
-      res.json(note);
+      success = true
+      res.json({success});
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ Error: "Internal Server Error" });
@@ -74,6 +77,7 @@ router.post(
 // Route 3:- Update an existing note using : PUT "api/notes/updatenote" : Login Required
 
 router.put("/updatenote/:id", fetchUser, async (req, res) => {
+  let success = false;
   try {
     const { title, description, tag } = req.body;
 
@@ -106,7 +110,8 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
       { $set: newNote },
       { new: true }
     );
-    res.json(note);
+    success = true;
+    res.json({success});
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ Error: "Internal Server Error" });
@@ -116,6 +121,7 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
 // Route 4:- Delete an existing note using : DELETE "api/notes/deletenote" : Login Required
 
 router.delete("/deletenote/:id", fetchUser, async (req, res) => {
+  let success = false;
   try {
     // Find the note to be deleted and delete it
 
@@ -131,7 +137,8 @@ router.delete("/deletenote/:id", fetchUser, async (req, res) => {
 
     // Deleting note from the database.
     note = await Notes.findByIdAndDelete(req.params.id);
-    res.json({ Success: "Note has been deleted successfully", Note: note });
+    success = true;
+    res.json({success, Status: "Note has been deleted successfully", Note: note });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ Error: "Internal Server Error" });
