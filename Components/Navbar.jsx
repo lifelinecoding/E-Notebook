@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleLogout = () => {
+    localStorage.removeItem("auth-token");
+    navigate("/login");
+  };
   return (
     <nav className="navbar fixed-top navbar-expand-lg bg-dark text-white">
       <div className="container-fluid">
@@ -23,7 +29,7 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
-                className="nav-link active text-light"
+                className={`nav-link ${location.pathname === '/'? "text-danger" : "text-light"}`}
                 aria-current="page"
                 to="/"
               >
@@ -31,25 +37,31 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-light" to="/about">
+              <Link className={`nav-link ${location.pathname === '/about'? "text-danger" : "text-light"}`} to="/about">
                 About
               </Link>
             </li>
           </ul>
         </div>
       </div>
-      <div className="d-flex">
-        <Link className="btn btn-primary mx-2" to="/login">
-          Login
-        </Link>
-        <Link
-          style={{ width: "100px", marginRight: "10px" }}
-          to="/signup"
-          className="btn btn-primary"
-        >
-          Sign Up
-        </Link>
-      </div>
+      {!localStorage.getItem("auth-token") ? (
+        <div className="d-flex">
+          <Link className="btn btn-primary mx-2 fw-bold" to="/login">
+            Login
+          </Link>
+          <Link
+            style={{ width: "100px", marginRight: "10px" }}
+            to="/signup"
+            className="btn btn-primary fw-bold"
+          >
+            Sign Up
+          </Link>
+        </div>
+      ) : (
+        <button className="btn btn-primary mx-2 fw-bold" style={{ width: "100px", marginRight: "10px" }} onClick={handleLogout}>
+          Log Out
+        </button>
+      )}
     </nav>
   );
 };

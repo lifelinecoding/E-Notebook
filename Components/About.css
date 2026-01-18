@@ -1,0 +1,96 @@
+.about-page {
+  font-family: "Segoe UI", sans-serif;
+  background: #f8fafc;
+}
+
+/* HERO */
+.about-hero {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  margin-top: -40px;
+}
+
+.about-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.about-hero p {
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* SECTION */
+.about-section,
+.developer-section,
+.feedback-section {
+  margin-top: 40px;
+}
+
+.section-card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-6px);
+}
+
+.section-card h2 {
+  margin-bottom: 15px;
+}
+
+/* LIST */
+.section-card ul {
+  padding-left: 20px;
+}
+
+.section-card ul li {
+  margin-bottom: 8px;
+}
+
+/* DEVELOPER */
+.dev-info p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.dev-info i {
+  margin-right: 8px;
+  color: #4f46e5;
+}
+
+/* FEEDBACK */
+.feedback-card input,
+.feedback-card textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.feedback-card textarea {
+  resize: none;
+  height: 120px;
+}
+
+.feedback-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.feedback-card button:hover {
+  background: #4338ca;
+}

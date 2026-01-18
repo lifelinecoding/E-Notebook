@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Context from "../Context/Note/NoteContext";
-// import AlertContext from "../Context/Alert/AlertContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const context = useContext(Context);
   const { Note, getNotes, updateNote } = context;
-  // const alertcontext = useContext(AlertContext);
-  // const { showAlert } = alertcontext;
+  const navigate = useNavigate();
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem("auth-token")) {
+      getNotes();
+    } else {
+      navigate("/login");
+    }
   }, [Note]);
 
   const ref = useRef(null);
