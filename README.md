@@ -1,16 +1,151 @@
-# React + Vite
+## 📓 E-Notebook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+E-Notebook is a secure, cloud-based note management web application built using the MERN Stack. It allows users to create, edit, delete, and manage personal notes from anywhere with complete data security.
 
-Currently, two official plugins are available:
+```
+🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔐 User Authentication
 
-## React Compiler
+Secure login & signup using JWT (JSON Web Token)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+📝 Note Management
 
-## Expanding the ESLint configuration
+Create, edit, delete notes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Notes stored securely in MongoDB
+
+☁️ Cloud Storage
+
+Access notes from any device
+
+📱 Responsive UI
+
+Works smoothly on desktop, tablet, and mobile
+
+⚡ Fast & Scalable
+
+RESTful APIs using Express & Node.js
+
+🧠 Modern React Concepts
+
+Context API
+
+Hooks (useState, useEffect, useContext, useRef)
+
+Lazy loading & code splitting (where applicable)
+
+```
+
+```
+🛠️ Tech Stack
+Frontend
+
+React.js
+
+React Router
+
+Context API
+
+Bootstrap / Custom CSS
+
+Font Awesome Icons
+
+Backend
+
+Node.js
+
+Express.js
+
+MongoDB
+
+Mongoose
+
+JWT Authentication
+
+bcrypt.js
+
+```
+
+## ⚙️ Installation & Setup
+
+```
+
+1️⃣ Clone the repository
+git clone https://github.com/your-github-username/E-Notebook.git
+
+2️⃣ Install Backend Dependencies
+cd E-Notebook/Backend
+npm install
+
+3️⃣ Install Frontend Dependencies
+cd ../
+npm install
+
+```
+
+## 🔐 Environment Variables
+
+Create a .env file inside the Backend folder:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+
+## ▶️ Running the Project
+
+    Run Backend
+
+cd Backend
+npm run dev
+
+    Run Frontend
+npm run dev
+
+    Run Both (Optional)
+npm run both
+
+``` 
+🌐 API Endpoints (Sample)
+Method	Endpoint	Description
+POST	/api/auth/createuser	Register user
+POST	/api/auth/login	Login user
+GET	/api/notes/fetchallnotes	Get user notes
+POST	/api/notes/addnote	Add new note
+PUT	/api/notes/updatenote/:id	Update note
+DELETE	/api/notes/deletenote/:id	Delete note
+```
+
+## 🧑‍💻 Developer Information
+
+Name: Aditya Patel
+
+Email: apatel89329@gmail.com
+
+GitHub: https://github.com/lifelinecoding
+
+## 🧩 Future Enhancements
+
+🌙 Dark Mode
+
+🔍 Search & Filter Notes
+
+📁 Note Categories & Tags
+
+🔔 Reminders & Notifications
+
+📊 Admin Dashboard
+
+☁️ File Upload Support
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork the repository and submit a pull request.
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+## ⭐ Support
+
+If you like this project, please consider giving it a ⭐ on GitHub!
