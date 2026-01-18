@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import fetchUser from "../Middleware/fetchuser.js";
 
-const JWT_SECRET = "ThisisaJWT@#SEC&RET";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Creating a express router to catching the route
 const router = express.Router();
@@ -72,7 +72,7 @@ router.post(
       console.error(error.message);
       res.status(500).json({ error: "Internal Server Error" });
     }
-  }
+  },
 );
 
 // Route 2:- Authenticate a user using: POST "/api/auth/login" : No login Required
@@ -139,7 +139,7 @@ router.post(
       console.error(error.message);
       res.status(500).json({ Error: "Internal Server Error" });
     }
-  }
+  },
 );
 
 // Route 3:- Get Logged in user deatails using: POST "/api/auth/getuser" : Login required

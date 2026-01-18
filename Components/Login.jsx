@@ -40,7 +40,8 @@ const Login = () => {
     // Login logic will go here (API call)
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const loginEndpoint = import.meta.env.VITE_LOGIN_ENDPOINT;
+      const response = await fetch(`${loginEndpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

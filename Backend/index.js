@@ -1,8 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env.local" });
+// dotenv.config();
+
 import express from "express";
 import connectToDatabase from "./Database.js";
 import authRoutes from "./Routes/auth.js";
 import notesRoute from "./Routes/notes.js";
 import cors from 'cors';
+
 
 const app = express();
 
@@ -25,4 +30,5 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`E-Notebook Backend listening on port ${port}`);
+  // console.log(process.env.JWT_SECRET);
 });

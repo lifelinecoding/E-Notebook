@@ -43,7 +43,8 @@ const Signup = () => {
 
     // console.log("Signup Data:", credentials);
     try {
-      let response = await fetch("http://localhost:5000/api/auth/createuser", {
+      const signUpEndpoint = import.meta.env.VITE_SIGNUP_ENDPOINT;
+      let response = await fetch(`${signUpEndpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

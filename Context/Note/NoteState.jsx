@@ -6,13 +6,14 @@ const NoteState = (props) => {
   const alertcontext = useContext(AlertContext);
   const { showAlert } = alertcontext;
 
-  const Host = "http://localhost:5000/api";
+  // const Host = "http://localhost:5000/api";
 
   const [Note, setNote] = useState([]);
 
   const getNotes = async () => {
+    const getNotesEndpoint = import.meta.env.VITE_GETALLNOTES_ENDPOINT;
     try {
-      const promise = await fetch(`${Host}/notes/fetchallnotes`, {
+      const promise = await fetch(`${getNotesEndpoint}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -29,8 +30,9 @@ const NoteState = (props) => {
 
   // Function to add a new note
   const addNote = async (title, description, tag) => {
+    const addNoteEndpoint = import.meta.env.VITE_ADDNOTE_ENDPOINT;
     try {
-      const promise = await fetch(`${Host}/notes/addnote`, {
+      const promise = await fetch(`${addNoteEndpoint}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,8 +61,9 @@ const NoteState = (props) => {
   // Function to delete an existing note
 
   const deleteNote = async (id) => {
+    const deleteNoteEndpoint = import.meta.env.VITE_DELETENOTE_ENDPOINT;
     try {
-      const promise = await fetch(`${Host}/notes/deletenote/${id}`, {
+      const promise = await fetch(`${deleteNoteEndpoint + id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -85,8 +88,9 @@ const NoteState = (props) => {
 
   // Function to update an existing note
   const updateNote = async (id, title, description, tag) => {
+    const updateNoteEndpoint = import.meta.env.VITE_UPDATENOTE_ENDPOINT;
     try {
-      const promise = await fetch(`${Host}/notes/updatenote/${id}`, {
+      const promise = await fetch(`${updateNoteEndpoint + id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

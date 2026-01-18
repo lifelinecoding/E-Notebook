@@ -161,8 +161,8 @@ const Notes = () => {
 
       <div className="container my-3 d-flex justify-content-center">
         <div className="row w-[80] justify-content-start px-3">
-          {Note.length === 0 && "No notes to display"}
-          {Note.map((note, idx) => {
+          { Note && Note.length === 0 && "No notes to display"}
+          {Note && Note.map((note, idx) => {
             return <NoteItem key={idx} note={note} editNote={editNote} />;
           })}
         </div>

@@ -1,6 +1,9 @@
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-const DB_URI = "mongodb://localhost:27017/E_Notebook";
+dotenv.config({ path: ".env.local" });
+
+const DB_URI = process.env.MONGO_URI;
 
 const connectToDatabase = async () => {
   mongoose
