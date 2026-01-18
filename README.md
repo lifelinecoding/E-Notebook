@@ -2,8 +2,8 @@
 
 E-Notebook is a secure, cloud-based note management web application built using the MERN Stack. It allows users to create, edit, delete, and manage personal notes from anywhere with complete data security.
 
-```
-🚀 Features
+
+## 🚀 Features
 
 🔐 User Authentication
 
@@ -35,10 +35,9 @@ Hooks (useState, useEffect, useContext, useRef)
 
 Lazy loading & code splitting (where applicable)
 
-```
 
-```
-🛠️ Tech Stack
+
+## 🛠️ Tech Stack
 Frontend
 
 React.js
@@ -65,7 +64,7 @@ JWT Authentication
 
 bcrypt.js
 
-```
+
 
 ## ⚙️ Installation & Setup
 
@@ -93,19 +92,21 @@ JWT_SECRET=your_jwt_secret_key
 
 ## ▶️ Running the Project
 
-    Run Backend
+Run Backend
 
-cd Backend
-npm run dev
+    cd Backend
+    npm run dev
 
-    Run Frontend
-npm run dev
+Run Frontend
 
-    Run Both (Optional)
-npm run both
+    npm run dev
 
-``` 
-🌐 API Endpoints (Sample)
+Run Both (Optional)
+
+    npm run both
+
+ 
+## 🌐 API Endpoints (Sample)
 Method	Endpoint	Description
 POST	/api/auth/createuser	Register user
 POST	/api/auth/login	Login user
@@ -113,7 +114,7 @@ GET	/api/notes/fetchallnotes	Get user notes
 POST	/api/notes/addnote	Add new note
 PUT	/api/notes/updatenote/:id	Update note
 DELETE	/api/notes/deletenote/:id	Delete note
-```
+
 
 ## 🧑‍💻 Developer Information
 
