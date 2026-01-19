@@ -5,83 +5,80 @@ E-Notebook is a secure, cloud-based note management web application built using 
 
 ## 🚀 Features
 
-🔐 User Authentication
+### 🔐 User Authentication
 
-Secure login & signup using JWT (JSON Web Token)
+- Secure login & signup using JWT (JSON Web Token)
 
-📝 Note Management
+### 📝 Note Management
 
-Create, edit, delete notes
+- Create, edit, delete notes
+- Notes stored securely in MongoDB
 
-Notes stored securely in MongoDB
+### ☁️ Cloud Storage
 
-☁️ Cloud Storage
+- Access notes from any device
 
-Access notes from any device
+### 📱 Responsive UI
 
-📱 Responsive UI
+- Works smoothly on desktop, tablet, and mobile
 
-Works smoothly on desktop, tablet, and mobile
+### ⚡ Fast & Scalable
 
-⚡ Fast & Scalable
+- RESTful APIs using Express & Node.js
 
-RESTful APIs using Express & Node.js
+### 🧠 Modern React Concepts
 
-🧠 Modern React Concepts
-
-Context API
-
-Hooks (useState, useEffect, useContext, useRef)
-
-Lazy loading & code splitting (where applicable)
+- Context API
+- Hooks (useState, useEffect, useContext, useRef)
+- Lazy loading & code splitting (where applicable)
 
 
 
 ## 🛠️ Tech Stack
-Frontend
 
-React.js
+- Frontend
 
-React Router
+- React.js
 
-Context API
+- React Router
 
-Bootstrap / Custom CSS
+- Context API
 
-Font Awesome Icons
+- Bootstrap / Custom CSS
 
-Backend
+- Font Awesome Icons
 
-Node.js
+- Backend
 
-Express.js
+- Node.js
 
-MongoDB
+- Express.js
 
-Mongoose
+- MongoDB
 
-JWT Authentication
+- Mongoose
 
-bcrypt.js
+- JWT Authentication
+
+- bcrypt.js
 
 
 
 ## ⚙️ Installation & Setup
 
-```
 
-1️⃣ Clone the repository
-git clone https://github.com/your-github-username/E-Notebook.git
+### 1️⃣ Clone the repository
+    git clone https://github.com/your-github-username/E-Notebook.git
 
-2️⃣ Install Backend Dependencies
-cd E-Notebook/Backend
-npm install
+### 2️⃣ Install Backend Dependencies
+    cd E-Notebook/Backend
+    npm install
 
-3️⃣ Install Frontend Dependencies
-cd ../
-npm install
+### 3️⃣ Install Frontend Dependencies
+    cd ../
+    npm install
 
-```
+
 
 ## 🔐 Environment Variables
 
@@ -92,29 +89,31 @@ JWT_SECRET=your_jwt_secret_key
 
 ## ▶️ Running the Project
 
-Run Backend
+### Run Backend
 
     cd Backend
     npm run dev
 
-Run Frontend
+### Run Frontend
 
     npm run dev
 
-Run Both (Optional)
+### Run Both (Optional)
 
     npm run both
 
  
 ## 🌐 API Endpoints (Sample)
-Method	Endpoint	Description
-POST	/api/auth/createuser	Register user
-POST	/api/auth/login	Login user
-GET	/api/notes/fetchallnotes	Get user notes
-POST	/api/notes/addnote	Add new note
-PUT	/api/notes/updatenote/:id	Update note
-DELETE	/api/notes/deletenote/:id	Delete note
+```
+Method	            Endpoint	                    Description
+POST	            /api/auth/createuser	        Register user
+POST	            /api/auth/login	                Login user
+GET	                /api/notes/fetchallnotes	    Get user notes
+POST	            /api/notes/addnote	            Add new note
+PUT	                /api/notes/updatenote/:id	    Update note
+DELETE	            /api/notes/deletenote/:id	    Delete note
 
+```
 
 ## 🧑‍💻 Developer Information
 
@@ -126,17 +125,17 @@ GitHub: https://github.com/lifelinecoding
 
 ## 🧩 Future Enhancements
 
-🌙 Dark Mode
+- 🌙 Dark Mode
 
-🔍 Search & Filter Notes
+- 🔍 Search & Filter Notes
 
-📁 Note Categories & Tags
+- 📁 Note Categories & Tags
 
-🔔 Reminders & Notifications
+- 🔔 Reminders & Notifications
 
-📊 Admin Dashboard
+- 📊 Admin Dashboard
 
-☁️ File Upload Support
+- ☁️ File Upload Support
 
 ## 🤝 Contributing
 
