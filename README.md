@@ -82,10 +82,19 @@ E-Notebook is a secure, cloud-based note management web application built using 
 
 ## 🔐 Environment Variables
 
-Create a .env file inside the Backend folder:
+### Create a .env.local file inside the Backend folder:
 
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_key
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret_key
+
+### Create a .env.local file in the frontend folder:
+
+    VITE_LOGIN_ENDPOINT = Your Endpoint
+    VITE_SIGNUP_ENDPOINT = Your Endpoint
+    VITE_ADDNOTE_ENDPOINT = Your Endpoint
+    VITE_UPDATENOTE_ENDPOINT = Your Endpoint
+    VITE_DELETENOTE_ENDPOINT = Your Endpoint
+    VITE_GETALLNOTES_ENDPOINT = Your Endpoint 
 
 ## ▶️ Running the Project
 
